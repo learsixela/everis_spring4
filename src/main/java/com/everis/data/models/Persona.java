@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -37,7 +39,12 @@ public class Persona {
 	@OneToOne(mappedBy="persona", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private Licencia licencia;
     
-    
+    //muchos a uno
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="curso_id")
+	private Curso curso;
+	
+	
     public Persona() {};
     
     @PrePersist
@@ -83,6 +90,22 @@ public class Persona {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public Licencia getLicencia() {
+		return licencia;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setLicencia(Licencia licencia) {
+		this.licencia = licencia;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 }

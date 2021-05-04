@@ -11,6 +11,10 @@
 		<a href="/persona"> Nueva Persona</a>
 		<br>
 		<a href="/licencia"> Nueva Licencia</a>
+		<br>
+		<a href="/categoria"> Nueva Categoria</a>
+		<br>
+		<a href="/producto"> Nueva Producto</a>
 	</div>
 </body>
 </html>

@@ -2,10 +2,12 @@ package com.everis.data.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.everis.data.models.Persona;
+import com.everis.data.services.CursoService;
 import com.everis.data.services.PersonaService;
 
 @Controller
@@ -13,9 +15,12 @@ import com.everis.data.services.PersonaService;
 public class PersonaController {
 	@Autowired
 	PersonaService pService;
+	@Autowired
+	CursoService cService;
 	
 	@RequestMapping("")
-	public String inicioPersona() {
+	public String inicioPersona(Model model) {
+		model.addAttribute("listaCursos", cService.findAll());
 		return "persona.jsp";
 	}
 	
