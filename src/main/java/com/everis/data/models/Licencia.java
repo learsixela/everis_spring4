@@ -82,4 +82,12 @@ public class Licencia {
 		this.expiracion = expiracion;
 	}
 
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
 }

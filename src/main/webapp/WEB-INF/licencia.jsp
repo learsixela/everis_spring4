@@ -24,13 +24,14 @@
 		<br>
 		<!-- lista de personas -->
 		<label for="expiracion">Persona: </label>
-		<select>
+		<select name="persona">
 			<option value="0">Seleccione persona...</option>
 			<c:forEach var="persona" items="${listaPersonas}">
 				<option value="<c:out value="${persona.id}"></c:out>"><c:out value="${persona.nombre}"></c:out> </option>
 			</c:forEach>
 		</select>
-		
+		<br>
+		<input type="submit" value="Insertar Licencia">
 	</form>
 	<br>
 	<a href="/"> Home</a>
