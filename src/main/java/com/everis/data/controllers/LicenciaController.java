@@ -53,6 +53,7 @@ public class LicenciaController {
 			state=false;
 		}
 		licencia.setEstado(state);
+		
 		//fechas de String a Date
 		try {
 			Date fecha=new SimpleDateFormat("yyyy-MM-dd").parse(expiracion);
