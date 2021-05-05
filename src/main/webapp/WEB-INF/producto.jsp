@@ -42,8 +42,33 @@
 				</tr>
 				</c:forEach>
 			</tbody>
-</table>
+		</table>
 	
+		<br><hr>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Precio</th>
+					<th>accion</th>
+				</tr>
+			</thead>
+		<tbody>
+			<c:forEach var = "producto" items="${productos.content}">
+				<tr>
+					<td> 
+						<c:out value="${producto.nombre}"></c:out>
+					</td>
+					<td><c:out value="${producto.descripcion}"></c:out></td>
+					<td><c:out value="${producto.precio}"></c:out></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+		</table>
+		<c:forEach begin="1" end="${totalPagina}" var="index">
+			<a href="/producto/paginacion/${index}">pagina : ${index}</a>
+		</c:forEach>
 	
 	</div>
 </body>

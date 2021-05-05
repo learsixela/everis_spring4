@@ -28,13 +28,13 @@ public class ProductoController {
 	CategoriaService categoriaService;
 	
 	
-	private static final int CANT_PRODUCTOS = 4;
+	private static final int CANT_PRODUCTOS = 2;
 	
 	@RequestMapping("")
 	public String inicioProducto(HttpSession session,Model model) {
 		Integer registrado = (Integer) session.getAttribute("registrado");
 		if(registrado==1) {
-			productoService.querysJPQL();
+			//productoService.querysJPQL();
 			model.addAttribute("listaProductos", productoService.findAll());
 			//model.addAttribute("listaProductos", productoService.productosPaginados(1,CANT_PRODUCTOS));
 			
@@ -89,7 +89,7 @@ public class ProductoController {
 			Model model) {
 		//paginas iterable comienzan en 0 cero. 1 a maxPag (ultima pagina)
 		Page<Producto> productos= productoService.productosPaginados(numeroPagina-1, CANT_PRODUCTOS);
-		
+		//productos.
 		int totalPagina= productos.getTotalPages();
 		model.addAttribute("totalPagina", totalPagina);
 		model.addAttribute("productos", productos);
