@@ -1,5 +1,7 @@
 package com.everis.data.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,12 @@ public class CursoController {
 	CursoService cService;
 	
 	@RequestMapping("")
-	public String inicioCurso() {
-		return "curso.jsp";
+	public String inicioCurso(HttpSession session) {
+		Integer registrado = (Integer) session.getAttribute("registrado");
+		if(registrado==1) {
+			return "curso.jsp";
+		}
+		return "login.jsp";
 	}
 	
 	@RequestMapping("/insertar")

@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,18 @@ public class LicenciaController {
 	PersonaService pService;
 	
 	@RequestMapping("")
-	public String inicioLicencia(Model model) {
-		//obtener todas las personas
-		//List<Persona> listaPersonas = pService.findAll();
-		model.addAttribute("listaPersonas", pService.findAll());
-		//consultar objeto por Lazy
-		//Licencia licencia = lService.finById(1L);
-		return "licencia.jsp";
+	public String inicioLicencia(Model model,HttpSession session) {
+		Integer registrado = (Integer) session.getAttribute("registrado");
+		if(registrado==1) {
+			//obtener todas las personas
+			//List<Persona> listaPersonas = pService.findAll();
+			model.addAttribute("listaPersonas", pService.findAll());
+			//consultar objeto por Lazy
+			//Licencia licencia = lService.finById(1L);
+			return "licencia.jsp";
+		}
+
+		return "login.jsp";
 	}
 	
 	@RequestMapping("/insertar")

@@ -28,9 +28,14 @@ public class ProductoController {
 	
 	@RequestMapping("")
 	public String inicioProducto(HttpSession session,Model model) {
-		productoService.querysJPQL();
-		model.addAttribute("listaProductos", productoService.findAll());
-		return "producto.jsp";
+		Integer registrado = (Integer) session.getAttribute("registrado");
+		if(registrado==1) {
+			productoService.querysJPQL();
+			model.addAttribute("listaProductos", productoService.findAll());
+			return "producto.jsp";
+		}
+		
+		return "login.jsp";
 	}
 	
 	@RequestMapping("/insertar")
