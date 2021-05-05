@@ -26,4 +26,26 @@ public class ProductoService {
 		return productoRepository.findById(id).get();
 	}
 
+	
+	public void querysJPQL() {
+		//JPQL
+		List<Producto> lista1 =productoRepository.findAllProductos();
+		List<String> lista2 = productoRepository.findAllProductosNombres();
+		List<Producto> lista3 = productoRepository.getProductoWhereId(2L);
+		Producto prod= productoRepository.getSingleProductoWhereId(3L);
+		//modificar
+		int respuesta=productoRepository.setNombreForOne("Mouse", 2L);
+		int respuesta2=productoRepository.setNombreForAll("Notebook");
+		int respuesta3=productoRepository.deleteOneProducto(2L);
+		
+		/**
+		 * Querys nativas
+		 */
+		
+		List<Object[]> oProductos = productoRepository.findAllProductosWithfilter();
+		Object[] vProducto = oProductos.get(0);//cargara el primer producto
+		Object productoId= vProducto[0];
+		Object productoNombre= vProducto[1];
+		System.out.println(productoId+" - "+productoNombre);
+	}
 }

@@ -26,7 +26,7 @@ public class ProductoController {
 	
 	@RequestMapping("")
 	public String inicioProducto(Model model) {
-		
+		productoService.querysJPQL();
 		model.addAttribute("listaProductos", productoService.findAll());
 		return "producto.jsp";
 	}
