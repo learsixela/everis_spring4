@@ -29,5 +29,19 @@ public class LoginService {
 		return loginRepository.findByEmail(email);
 	}
 
+	public boolean autenticacion(String email,String password) {
+		Login login = loginRepository.findByEmail(email);
+		
+		//existencia de la persona
+		if(login == null) {
+			return false;
+		}else {
+			if(BCrypt.checkpw(password, login.getPassword())) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
 	
 }

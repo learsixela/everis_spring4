@@ -18,6 +18,28 @@
 			<br>
 			<input type="submit" value="Login">
 	</form>
+	
+	<!-- 
+	<form action="/login/guardar" method="post">
+			<label for="email">Email: </label>
+			<input type="text" name="email" id="email">
+			<br>
+			<label for="password">Password: </label>
+			<input type="text" name="password" id="password">
+			<br>
+			<input type="submit" value="guardar">
+	</form>
+	<br>
+	<form action="/login/login" method="post">
+			<label for="email">Email: </label>
+			<input type="text" name="email" id="email">
+			<br>
+			<label for="password">Password: </label>
+			<input type="text" name="password" id="password">
+			<br>
+			<input type="submit" value="Login">
+	</form>
+	 -->
 	<c:out value="${mensaje}"></c:out>
 	</div>
 </body>
