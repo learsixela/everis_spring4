@@ -10,7 +10,8 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String index(HttpSession session) {
-		session.invalidate();
+		//session.invalidate();
+		session.setAttribute("registrado",0);
 		return "login.jsp";
 	}
 }

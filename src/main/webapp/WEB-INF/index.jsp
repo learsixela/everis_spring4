@@ -9,8 +9,8 @@
 </head>
 <body>
 	<div>
-
-		<c:if test="${registrado}">
+		<!-- <c:if test="${registrado} "> dato recibido por model -->
+		<c:if test="${sessionScope.registrado == 1} ">
 			
 			<br>
 			<a href="/licencia"> Nueva Licencia</a>
@@ -19,7 +19,7 @@
 			<br>
 			<a href="/producto"> Nueva Producto</a>
 		</c:if>
-		<c:if test="${!registrado}">
+		<c:if test="${sessionScope.registrado == 0}">
 			<a href="/persona"> Nueva Persona</a>
 			<a href="/login"> Nueva Login</a>
 		</c:if>
