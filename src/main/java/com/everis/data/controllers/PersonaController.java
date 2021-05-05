@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,7 +22,7 @@ public class PersonaController {
 	@Autowired
 	CursoService cService;
 	
-	@RequestMapping("")
+	@RequestMapping("/registro")
 	public String inicioPersona(Model model) {
 		model.addAttribute("listaCursos", cService.findAll());
 		return "persona.jsp";
@@ -44,13 +46,15 @@ public class PersonaController {
 		return "redirect:/persona/login";
 	}
 	
-	@RequestMapping("/login")
+	///persona/login
+	@PostMapping("/login")
 	public String login(@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			HttpSession session,
 			Model model) {
 		
 		//boolean respuesta = pService.autenticacion(email, password);
+		
 		
 		if(pService.autenticacion(email, password)) {
 			session.setAttribute("email", email);
@@ -63,16 +67,22 @@ public class PersonaController {
 		
 			System.out.println(mail+" - "+registrado+" - "+contador);
 			
-			model.addAttribute("registrado", true);
+			//model.addAttribute("registrado", true);
 			return "index.jsp";
 		}else {
 			session.removeAttribute("registrado");
+			session.setAttribute("registrado",0);
 			//session.invalidate();
 			model.addAttribute("mensaje", "Datos erroneos");
 			return "login.jsp";
 		}
 		
-		
+	}
+	///persona/login
+	@GetMapping("/login")
+	public String getLogin(HttpSession session) {
+		session.setAttribute("registrado",0);
+		return "login.jsp";
 	}
 
 }

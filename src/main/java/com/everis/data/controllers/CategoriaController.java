@@ -1,5 +1,7 @@
 package com.everis.data.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,12 @@ public class CategoriaController {
 	CategoriaService categoriaService;
 	
 	@RequestMapping("")
-	public String inicioCategoria() {
-		return "categoria.jsp";
+	public String inicioCategoria(HttpSession session) {
+		Integer registrado = (Integer) session.getAttribute("registrado");
+		if(registrado==1) {
+			return "categoria.jsp";
+		}
+		return "login.jsp";
 	}
 	
 	@RequestMapping("/insertar")
