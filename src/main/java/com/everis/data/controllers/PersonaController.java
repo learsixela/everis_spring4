@@ -1,5 +1,7 @@
 package com.everis.data.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,13 +47,25 @@ public class PersonaController {
 	@RequestMapping("/login")
 	public String login(@RequestParam("email") String email,
 			@RequestParam("password") String password,
+			HttpSession session,
 			Model model) {
 		
 		//boolean respuesta = pService.autenticacion(email, password);
 		
 		if(pService.autenticacion(email, password)) {
+			session.setAttribute("email", email);
+			session.setAttribute("registrado",1);//boolean
+			session.setAttribute("contador",100);
+			
+			String mail = (String) session.getAttribute("email");
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			Integer contador = (Integer) session.getAttribute("contador");
+			
+			
 			return "index.jsp";
 		}else {
+			session.removeAttribute("registrado");
+			//session.invalidate();
 			model.addAttribute("mensaje", "Datos erroneos");
 			return "login.jsp";
 		}
