@@ -26,15 +26,37 @@ public class PersonaController {
 	
 	@RequestMapping("/insertar")
 	public String insertar(@RequestParam("nombre") String nombre,
-			@RequestParam("apellido") String apellido){
+			@RequestParam("apellido") String apellido,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password
+			){
 		Persona persona = new Persona();
 		persona.setNombre(nombre);
 		persona.setApellido(apellido);
+		persona.setEmail(email);
+		persona.setPassword(password);
 		
 		persona= pService.save(persona);
 		
 		
 		return "redirect:/licencia";
+	}
+	
+	@RequestMapping("/login")
+	public String login(@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			Model model) {
+		
+		//boolean respuesta = pService.autenticacion(email, password);
+		
+		if(pService.autenticacion(email, password)) {
+			return "index.jsp";
+		}else {
+			model.addAttribute("mensaje", "Datos erroneos");
+			return "login.jsp";
+		}
+		
+		
 	}
 
 }

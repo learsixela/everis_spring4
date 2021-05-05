@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div>
+		<a href="/login"> Nueva Login</a>
 		<a href="/persona"> Nueva Persona</a>
 		<br>
 		<a href="/licencia"> Nueva Licencia</a>

@@ -27,6 +27,8 @@ public class Persona {
 	private Long id;
 	private String nombre;
 	private String apellido;
+	private String email;
+	private String password;
 	
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -106,6 +108,22 @@ public class Persona {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

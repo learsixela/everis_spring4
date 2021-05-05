@@ -17,7 +17,12 @@
 			<label for="apellido">Apellido: </label>
 			<input type="text" name="apellido" id="apellido">
 			<br>
-					<br>
+			<label for="email">Email: </label>
+			<input type="text" name="email" id="email">
+			<br>
+			<label for="password">Password: </label>
+			<input type="text" name="password" id="password">
+			<br>
 			<!-- lista de personas -->
 			<label for="curso">Curso: </label>
 			<select name="curso">

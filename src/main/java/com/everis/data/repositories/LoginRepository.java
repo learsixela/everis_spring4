@@ -3,11 +3,10 @@ package com.everis.data.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.everis.data.models.Persona;
+import com.everis.data.models.Login;
 
 @Repository
-public interface PersonaRepository extends JpaRepository<Persona, Long>{
+public interface LoginRepository extends JpaRepository<Login, Long> {
 
-	Persona findByEmail(String email);
-
+	Login findByEmail(String email);
 }
