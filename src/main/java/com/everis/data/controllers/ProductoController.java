@@ -2,6 +2,8 @@ package com.everis.data.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class ProductoController {
 	CategoriaService categoriaService;
 	
 	@RequestMapping("")
-	public String inicioProducto(Model model) {
+	public String inicioProducto(HttpSession session,Model model) {
 		productoService.querysJPQL();
 		model.addAttribute("listaProductos", productoService.findAll());
 		return "producto.jsp";
@@ -47,7 +49,7 @@ public class ProductoController {
 	}
 
 	@RequestMapping("/editar/{id}")
-	public String editar(@PathVariable("id") Long id, Model model) {
+	public String editar(@PathVariable("id") Long id,HttpSession session, Model model) {
 		Producto prod= productoService.findById(id);
 		
 		List<Categoria> listaCategorias =  categoriaService.findAll();
@@ -58,7 +60,7 @@ public class ProductoController {
 	}
 	
 	@RequestMapping("/update")
-	public String update(@ModelAttribute("producto")Producto prod ) {
+	public String update(@ModelAttribute("producto")Producto prod,HttpSession session ) {
 		productoService.save(prod);
 		return "redirect:/producto";
 	}

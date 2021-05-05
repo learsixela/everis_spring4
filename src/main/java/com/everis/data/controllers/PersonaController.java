@@ -41,7 +41,7 @@ public class PersonaController {
 		persona= pService.save(persona);
 		
 		
-		return "redirect:/licencia";
+		return "redirect:/persona/login";
 	}
 	
 	@RequestMapping("/login")
@@ -60,8 +60,10 @@ public class PersonaController {
 			String mail = (String) session.getAttribute("email");
 			Integer registrado = (Integer) session.getAttribute("registrado");
 			Integer contador = (Integer) session.getAttribute("contador");
+		
+			System.out.println(mail+" - "+registrado+" - "+contador);
 			
-			
+			model.addAttribute("registrado", true);
 			return "index.jsp";
 		}else {
 			session.removeAttribute("registrado");
