@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,12 +27,22 @@ public class ProductoController {
 	@Autowired
 	CategoriaService categoriaService;
 	
+	
+	private static final int CANT_PRODUCTOS = 4;
+	
 	@RequestMapping("")
 	public String inicioProducto(HttpSession session,Model model) {
 		Integer registrado = (Integer) session.getAttribute("registrado");
 		if(registrado==1) {
 			productoService.querysJPQL();
 			model.addAttribute("listaProductos", productoService.findAll());
+			//model.addAttribute("listaProductos", productoService.productosPaginados(1,CANT_PRODUCTOS));
+			
+			Page<Producto> productos= productoService.productosPaginados(0, CANT_PRODUCTOS);
+			
+			int totalPagina= productos.getTotalPages();
+			model.addAttribute("totalPagina", totalPagina);
+			model.addAttribute("productos", productos);
 			return "producto.jsp";
 		}
 		
@@ -69,4 +80,23 @@ public class ProductoController {
 		productoService.save(prod);
 		return "redirect:/producto";
 	}
+	
+	/**
+	 * Paginacion
+	 * */
+	@RequestMapping("/paginacion/{numeroPagina}")
+	public String getProductosPagina(@PathVariable("numeroPagina") int numeroPagina,
+			Model model) {
+		//paginas iterable comienzan en 0 cero. 1 a maxPag (ultima pagina)
+		Page<Producto> productos= productoService.productosPaginados(numeroPagina-1, CANT_PRODUCTOS);
+		
+		int totalPagina= productos.getTotalPages();
+		model.addAttribute("totalPagina", totalPagina);
+		model.addAttribute("productos", productos);
+		
+		return "producto.jsp";
+	}
+	
+	
+	
 }

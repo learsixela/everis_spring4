@@ -3,6 +3,8 @@ package com.everis.data.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.everis.data.models.Producto;
@@ -12,6 +14,17 @@ import com.everis.data.repositories.ProductoRepository;
 public class ProductoService {
 	@Autowired
 	ProductoRepository productoRepository;
+	
+	//private static final int PAGE_SIZE = 4;//cantidad de elementos
+	
+	public Page<Producto> productosPaginados(int numeroPagina , int cantElementos){
+		
+		//obtener todos los productos y ordenarlos por nombre de forma ascendente
+		PageRequest pageRequest = PageRequest.of(numeroPagina, cantElementos);
+		
+		return productoRepository.findAll(pageRequest);
+	}
+	
 
 	public void save(Producto curso) {
 		productoRepository.save(curso);
@@ -26,7 +39,6 @@ public class ProductoService {
 		return productoRepository.findById(id).get();
 	}
 
-	
 	public void querysJPQL() {
 		//JPQL
 		List<Producto> lista1 =productoRepository.findAllProductos();
