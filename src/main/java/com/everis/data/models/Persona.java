@@ -1,6 +1,7 @@
 package com.everis.data.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,6 +33,9 @@ public class Persona {
 	private String apellido;
 	private String email;
 	private String password;
+	
+	@Transient
+	private String passwordConfirmation;
 	
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -47,7 +54,19 @@ public class Persona {
 	private Curso curso;
 	
 	
+	
+    //mucho a mucho
+    @ManyToMany(fetch=FetchType.LAZY)
+  //tabla relacional
+    @JoinTable(
+    		name="personas_roles", //plural
+    	joinColumns = @JoinColumn(name= "persona_id"),//singular
+    	inverseJoinColumns = @JoinColumn(name= "rol_id")//singular
+    		)
+    private List<Rol> roles;
+    
     public Persona() {};
+    
     
     @PrePersist
     protected void onCreate(){
@@ -124,6 +143,22 @@ public class Persona {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
 
 }
