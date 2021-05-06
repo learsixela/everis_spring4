@@ -80,5 +80,6 @@ public class Rol {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+
 	
 }
